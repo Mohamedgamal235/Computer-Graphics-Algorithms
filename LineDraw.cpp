@@ -9,35 +9,65 @@ bool isDrawing = false;
 COLORREF startColor = RGB(255, 0, 0); // Red
 COLORREF endColor = RGB(0, 0, 255);   // Blue
 
-void InterpolatedColoredLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF c1, COLORREF c2) {
-    int dx = abs(x2 - x1), dy = abs(y2 - y1);
-    int sx = (x1 < x2) ? 1 : -1;
-    int sy = (y1 < y2) ? 1 : -1;
-    int err = dx - dy;
+void InterpolatedBresenhamLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF c1, COLORREF c2) {
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+
+    int x = x1;
+    int y = y1;
+
+    int x_inc = (x2 > x1) ? 1 : -1;
+    int y_inc = (y2 > y1) ? 1 : -1;
 
     int r1 = GetRValue(c1), g1 = GetGValue(c1), b1 = GetBValue(c1);
     int r2 = GetRValue(c2), g2 = GetGValue(c2), b2 = GetBValue(c2);
 
     int steps = max(dx, dy);
-    float dr = (float)(r2 - r1) / steps;
-    float dg = (float)(g2 - g1) / steps;
-    float db = (float)(b2 - b1) / steps;
+    int r_step = (r2 - r1) / steps;
+    int g_step = (g2 - g1) / steps;
+    int b_step = (b2 - b1) / steps;
 
-    float r = r1, g = g1, b = b1;
+    int r = r1, g = g1, b = b1;
 
-    while (true) {
-        SetPixel(hdc, x1, y1, RGB((int)r, (int)g, (int)b));
-
-        if (x1 == x2 && y1 == y2) break;
-
-        int e2 = 2 * err;
-        if (e2 > -dy) { err -= dy; x1 += sx; }
-        if (e2 < dx) { err += dx; y1 += sy; }
-
-        r += dr;
-        g += dg;
-        b += db;
+    if (dy <= dx) { // 0 < slop < 1
+        int d = dx - 2 * dy ;
+        int change1 = 2 * (dx - dy);
+        int change2 = -2 * dy ;
+        SetPixel(hdc , x , y , RGB(r, g, b));
+        for (int i = 0 ; i <= dx ; i++) {
+            if (d < 0) {
+                d += change1 ;
+                y += y_inc ;
+            }
+            else
+                d += change2 ;
+            x += x_inc ;
+            r += r_step;
+            b += b_step;
+            g += g_step;
+            SetPixel(hdc , x , y , RGB(r , g , b));
+        }
     }
+    else { // slop > 1
+        int d = 2 * dx - dy ;
+        int change1 = 2 * (dx - dy);
+        int change2 = 2 * dx ;
+        SetPixel(hdc , x , y , RGB(r , g , b));
+        for (int i = 0 ; i <= dy ; i++) {
+            if (d < 0) {
+                d += change1 ;
+                x += x_inc;
+            }
+            else
+                d += change2 ;
+            y += y_inc;
+            r += r_step;
+            b += b_step;
+            g += g_step;
+            SetPixel(hdc , x , y , RGB(r , g , b));
+        }
+    }
+
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -59,7 +89,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
         if (isDrawing)
-            InterpolatedColoredLine(hdc, x_start, y_start, x_end, y_end, startColor, endColor);
+            InterpolatedBresenhamLine(hdc, x_start, y_start, x_end, y_end, startColor, endColor);
         EndPaint(hwnd, &ps);
         break;
     }
