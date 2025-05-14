@@ -15,10 +15,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0,
-						1,
-						2,
-						3
+						0
 					]
 				}
 			],
@@ -33,10 +30,7 @@
 					"name" : "Graphics",
 					"targetIndexes" : 
 					[
-						0,
-						1,
-						2,
-						3
+						0
 					]
 				}
 			],
@@ -44,29 +38,8 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "Circle::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Circle-Debug-32622f4562244d4eebb5.json",
-					"name" : "Circle",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "Curve::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Curve-Debug-8c8a069fb0adb96c8497.json",
-					"name" : "Curve",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "Graphics::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Graphics-Debug-023888b2fa5562be404d.json",
-					"name" : "Graphics",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
 					"id" : "Line::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Line-Debug-9e8a5038e036ecc35265.json",
+					"jsonFile" : "target-Line-Debug-56e13d71e1483031f3e0.json",
 					"name" : "Line",
 					"projectIndex" : 0
 				}
