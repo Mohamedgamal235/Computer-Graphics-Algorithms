@@ -70,6 +70,62 @@ void InterpolatedBresenhamLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF
 
 }
 
+
+void InterpolatedColoredLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF c1, COLORREF c2) {
+    int dx = x2 - x1 ;
+    int dy = y2 - y1 ;
+
+    int r1 = GetRValue(c1), g1 = GetGValue(c1), b1 = GetBValue(c1);
+    int r2 = GetRValue(c2), g2 = GetGValue(c2), b2 = GetBValue(c2);
+
+    if (abs(dy) <= abs(dx)) {
+        double slope = (double)dy / (double)dx;
+
+        if (x1 > x2) {
+            swap(x1 , x2 );
+            swap(y1 , y2 );
+            swap(r1 , r2 );
+            swap(g1 , g2 );
+            swap(b1 , b2 );
+        }
+
+        int len = x2 - x1 ;
+        for (int x = x1 ; x <= x2 ; x++) {
+            int y = round(y1 + (x - x1) * slope);
+            double t = (double)(x - x1) / (double)len ;
+
+            int r = (int)(r1 + t * (r2 - r1));
+            int g = (int)(g1 + t * (g2 - g1));
+            int b = (int)(b1 + t * (b2 - b1));
+
+            SetPixel(hdc , x , y , RGB(r, g ,b));
+        }
+    }
+    else {
+        double slope = (double)dx / (double)dy;
+        if (y1 > y2) {
+            swap(y1 , y2);
+            swap(x1 , x2);
+            swap(r1 , r2);
+            swap(g1 , g2);
+            swap(b1 , b2);
+        }
+
+        int len = y2 - y1 ;
+        for (int y = y1 ; y <= y2 ; y++) {
+            double t = (double)(y - y1) / (double)len;
+            int x = round(x1 + (y - y1) * slope);
+
+            int r = (int)(r1 + t * (r2 - r1));
+            int g = (int)(g1 + t * (g2 - g1));
+            int b = (int)(b1 + t * (b2 - b1));
+
+            SetPixel(hdc, x, y, RGB(r, g, b));
+        }
+    }
+}
+
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
     case WM_LBUTTONDOWN:
@@ -89,7 +145,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
         if (isDrawing)
-            InterpolatedBresenhamLine(hdc, x_start, y_start, x_end, y_end, startColor, endColor);
+            InterpolatedColoredLine(hdc, x_start, y_start, x_end, y_end, startColor, endColor);
         EndPaint(hwnd, &ps);
         break;
     }
@@ -102,6 +158,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     }
     return 0;
 }
+
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     WNDCLASS wc = { 0 };
