@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Graphics",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Circle::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Circle-Debug-32622f4562244d4eebb5.json",
+					"name" : "Circle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Curve::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Curve-Debug-8c8a069fb0adb96c8497.json",
+					"name" : "Curve",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Graphics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Graphics-Debug-023888b2fa5562be404d.json",
+					"name" : "Graphics",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Line::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Line-Debug-9e8a5038e036ecc35265.json",
+					"name" : "Line",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/Github/Graphics/cmake-build-debug",
+		"source" : "E:/Github/Graphics"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
