@@ -73,6 +73,39 @@ build Line.exe: CXX_EXECUTABLE_LINKER__Line_Debug CMakeFiles/Line.dir/LineDraw.c
   TARGET_IMPLIB = libLine.dll.a
   TARGET_PDB = Line.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target Circle
+
+
+#############################################
+# Order-only phony target for Circle
+
+build cmake_object_order_depends_target_Circle: phony || CMakeFiles/Circle.dir
+
+build CMakeFiles/Circle.dir/DrawCircle.cpp.obj: CXX_COMPILER__Circle_unscanned_Debug E$:/Github/Graphics/DrawCircle.cpp || cmake_object_order_depends_target_Circle
+  DEP_FILE = CMakeFiles\Circle.dir\DrawCircle.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Circle.dir
+  OBJECT_FILE_DIR = CMakeFiles\Circle.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Circle
+
+
+#############################################
+# Link the executable Circle.exe
+
+build Circle.exe: CXX_EXECUTABLE_LINKER__Circle_Debug CMakeFiles/Circle.dir/DrawCircle.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\Circle.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = Circle.exe
+  TARGET_IMPLIB = libCircle.dll.a
+  TARGET_PDB = Circle.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -99,6 +132,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
+build Circle: phony Circle.exe
+
 build Line: phony Line.exe
 
 # =============================================================================
@@ -109,7 +144,7 @@ build Line: phony Line.exe
 #############################################
 # Folder: E:/Github/Graphics/cmake-build-debug
 
-build all: phony Line.exe
+build all: phony Line.exe Circle.exe
 
 # =============================================================================
 # Built-in targets
