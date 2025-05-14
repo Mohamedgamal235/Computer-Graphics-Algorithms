@@ -10,7 +10,34 @@ COLORREF startColor = RGB(255, 0, 0); // Red
 COLORREF endColor = RGB(0, 0, 255);   // Blue
 
 void InterpolatedColoredLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF c1, COLORREF c2) {
-    
+    int dx = abs(x2 - x1), dy = abs(y2 - y1);
+    int sx = (x1 < x2) ? 1 : -1;
+    int sy = (y1 < y2) ? 1 : -1;
+    int err = dx - dy;
+
+    int r1 = GetRValue(c1), g1 = GetGValue(c1), b1 = GetBValue(c1);
+    int r2 = GetRValue(c2), g2 = GetGValue(c2), b2 = GetBValue(c2);
+
+    int steps = max(dx, dy);
+    float dr = (float)(r2 - r1) / steps;
+    float dg = (float)(g2 - g1) / steps;
+    float db = (float)(b2 - b1) / steps;
+
+    float r = r1, g = g1, b = b1;
+
+    while (true) {
+        SetPixel(hdc, x1, y1, RGB((int)r, (int)g, (int)b));
+
+        if (x1 == x2 && y1 == y2) break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy) { err -= dy; x1 += sx; }
+        if (e2 < dx) { err += dx; y1 += sy; }
+
+        r += dr;
+        g += dg;
+        b += db;
+    }
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
