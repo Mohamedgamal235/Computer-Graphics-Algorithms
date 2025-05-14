@@ -22,7 +22,6 @@ void CircleFasterBresenham(HDC hdc , int xc , int yc , int R , COLORREF color) {
 
     int c1 = 3, c2 = 5 - 2 * R;
     Draw8Points(hdc, xc, yc, x, y, color);
-
     while (x < y) {
         if (d < 0) {
             d += c1;
