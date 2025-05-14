@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <cmath>
-#include <algorithm>
+using namespace std ;
 
 
 struct Point {
