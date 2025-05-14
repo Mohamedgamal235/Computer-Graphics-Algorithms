@@ -1,4 +1,5 @@
 E:/Github/Graphics/cmake-build-debug/CMakeFiles/Line.dir
 E:/Github/Graphics/cmake-build-debug/CMakeFiles/Circle.dir
+E:/Github/Graphics/cmake-build-debug/CMakeFiles/Curve.dir
 E:/Github/Graphics/cmake-build-debug/CMakeFiles/edit_cache.dir
 E:/Github/Graphics/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Line LineDraw.cpp)
 add_executable(Circle DrawCircle.cpp)
+add_executable(Curve DrawBezierCurve.cpp)

@@ -106,6 +106,39 @@ build Circle.exe: CXX_EXECUTABLE_LINKER__Circle_Debug CMakeFiles/Circle.dir/Draw
   TARGET_IMPLIB = libCircle.dll.a
   TARGET_PDB = Circle.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target Curve
+
+
+#############################################
+# Order-only phony target for Curve
+
+build cmake_object_order_depends_target_Curve: phony || CMakeFiles/Curve.dir
+
+build CMakeFiles/Curve.dir/DrawBezierCurve.cpp.obj: CXX_COMPILER__Curve_unscanned_Debug E$:/Github/Graphics/DrawBezierCurve.cpp || cmake_object_order_depends_target_Curve
+  DEP_FILE = CMakeFiles\Curve.dir\DrawBezierCurve.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Curve.dir
+  OBJECT_FILE_DIR = CMakeFiles\Curve.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Curve
+
+
+#############################################
+# Link the executable Curve.exe
+
+build Curve.exe: CXX_EXECUTABLE_LINKER__Curve_Debug CMakeFiles/Curve.dir/DrawBezierCurve.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\Curve.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = Curve.exe
+  TARGET_IMPLIB = libCurve.dll.a
+  TARGET_PDB = Curve.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -134,6 +167,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build Circle: phony Circle.exe
 
+build Curve: phony Curve.exe
+
 build Line: phony Line.exe
 
 # =============================================================================
@@ -144,7 +179,7 @@ build Line: phony Line.exe
 #############################################
 # Folder: E:/Github/Graphics/cmake-build-debug
 
-build all: phony Line.exe Circle.exe
+build all: phony Line.exe Circle.exe Curve.exe
 
 # =============================================================================
 # Built-in targets
