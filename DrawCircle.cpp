@@ -6,11 +6,37 @@ int radius = 0;
 bool isCircle = false; 
 
 void Draw8Points(HDC hdc, int xc, int yc, int x, int y, COLORREF color) {
-    
+    SetPixel(hdc, xc + x, yc + y, color);
+    SetPixel(hdc, xc - x, yc + y, color);
+    SetPixel(hdc, xc + x, yc - y, color);
+    SetPixel(hdc, xc - x, yc - y, color);
+    SetPixel(hdc, xc + y, yc + x, color);
+    SetPixel(hdc, xc - y, yc + x, color);
+    SetPixel(hdc, xc + y, yc - x, color);
+    SetPixel(hdc, xc - y, yc - x, color);
 }
 
 void CircleFasterBresenham(HDC hdc , int xc , int yc , int R , COLORREF color) {
+    int x = 0, y = R;
+    int d = 1 - R;
 
+    int c1 = 3, c2 = 5 - 2 * R;
+    Draw8Points(hdc, xc, yc, x, y, color);
+
+    while (x < y) {
+        if (d < 0) {
+            d += c1;
+            c2 += 2;
+        }
+        else {
+            d += c2;
+            c2 += 4;
+            y--;
+        }
+        c1 += 2;
+        x++;
+        Draw8Points(hdc, xc, yc, x, y, color);
+    }
 }
 
 // Window procedure
